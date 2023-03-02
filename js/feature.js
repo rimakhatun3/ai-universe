@@ -1,14 +1,23 @@
-const loadFeature=()=>{
+const loadFeature=(datalimit)=>{
     url=`https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
     .then(res=>res.json())
-    .then(data=>displayFeature(data.data))
+    .then(data=>displayFeature(data.data,datalimit))
 }
 
-const displayFeature=(data)=>{
+const displayFeature=(data,datalimit)=>{
     console.log(data)
     const cardContainer= document.getElementById('card-container')
-    data.tools.forEach(singleFeture => {
+    cardContainer.innerHTML ='';
+    const seeAll = document.getElementById("see-all")
+    // if(datalimit && data.length>6){
+    // //  data = data.slice(0,6) 
+    //   seeAll.classList.remove('d-none')
+    // }
+    // else{
+    //   seeAll.classList.add('d-none')
+    // }
+    data.tools.slice(0,6).forEach(singleFeture => {
         console.log(singleFeture);
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
@@ -30,13 +39,33 @@ const displayFeature=(data)=>{
             </div>
           </div>
         `
+        
         cardContainer.appendChild(cardDiv);
-    });
-
-
-
-
+    }); 
     
+    toggleSpiner(false) 
 }
+
+const processSearch = datalimit =>{
+  toggleSpiner(true);
+  loadFeature(datalimit);
+}
+
+
+const toggleSpiner = isLoading =>{
+  const loader = document.getElementById('loader')
+  if(isLoading){
+loader.classList.remove('d-none')
+  }
+  else{
+    loader.classList.add('d-none')
+  }
+}
+
+document.getElementById('btn-see-all').addEventListener('click',function(){
+processSearch()
+})
+
+
 
 loadFeature();
