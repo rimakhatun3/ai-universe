@@ -9,6 +9,8 @@ const loadFeature=()=>{
       displayFeature(data.data)
       fetchData = data.data;
       console.log(fetchData);
+      
+     
     })
   
 }
@@ -52,8 +54,14 @@ const displayFeature=(data)=>{
         
         cardContainer.appendChild(cardDiv);
     }); 
+    const showDateInfo =()=>{
+      const fetchData =fetchData.filter(singleFeture.published_in)
+      console.log(fetchData)
+    } 
     
 }
+
+
 
 // const processSearch = datalimit =>{
 //   toggleSpiner(true);
@@ -102,7 +110,8 @@ div.innerHTML=`
 
 </div>
 `
-seAll.appendChild(div)
+seAll.appendChild(div);
+
   })
   
   
