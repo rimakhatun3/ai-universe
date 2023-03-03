@@ -46,7 +46,7 @@ const displayFeature=(data)=>{
                 <div><h5>${singleFeture.name}</h5>
                 <p><i class="fa-solid fa-calendar-days"></i> ${singleFeture.published_in}</p></div>
                 <div>
-                <i class="fa-solid fa-arrow-right" onclick="loadSingleData('${singleFeture.id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+                <i class="fa-solid fa-arrow-right bg-danger rounded-circle text-white p-2" onclick="loadSingleData('${singleFeture.id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
                 </div>
             </div>
           </div>
@@ -65,35 +65,31 @@ const showDateInfo =()=>{
       displayDate(data.data)
       fetchData = data.data;
       console.log(fetchData);
-  const fetchData =fetchData.map(tools.published_in)
+  // const fetchData =fetchData.map(tools.published_in)
+  const sorting = (a,b) =>{
+    const dateA = new Date(a.published_in);
+    const dateB = new Date(b.published_in);
+    if(dateA>dateB){
+      return 1
+    }
+    else if(dateA<dateB){
+      return -1
+    }
+    else {
+      return 0
+    }
+  }
     })
 } 
 
-const displayDate=(data)=>{
-  
-  data.tools.forEach(singleData=>{
-    // fetchData.sort(a,b){
-      
-    // }
-    console.log(singleData)
-  })
+const displayDate=(sortingDate)=>{
+  // fetchData = sortingDate.data.tools;
+  // sortingDate = sortingDate.tools.slice(0,6)
+  console.log(fetchData)
+  sortingDate.tools.forEach(datas=>{
+  console.log((datas.sort(fetchData)))
+    })
 }
-//  showDateInfo()
-      
-      
-
-
-
-// const processSearch = datalimit =>{
-//   toggleSpiner(true);
-//   loadFeature(datalimit);
-// }
-
-
-
-// document.getElementById('btn-see-all').addEventListener('click',function(){
-// processSearch()
-// })
 
 const loadAllData=()=>{
   url=`https://openapi.programming-hero.com/api/ai/tools`
