@@ -64,8 +64,8 @@ const showDateInfo =()=>{
       document.getElementById('loader').classList.add("d-none");
       displayDate(data.data)
       fetchData = data.data;
-      // console.log(fetchData);
-  // const fetchData =fetchData.filter(tools.published_in)
+      console.log(fetchData);
+  const fetchData =fetchData.map(tools.published_in)
     })
 } 
 
@@ -112,7 +112,7 @@ const div = document.createElement('div');
 div.classList.add('col');
 div.innerHTML=`
 <div>
-<div class="card h-100 mt-5">
+<div class="card h-100 mt-5 ">
               <img  src="${singleFeture.image}" class="card-img-top border-rounded  px-4 py-4" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Features</h5>
@@ -123,8 +123,7 @@ div.innerHTML=`
               <div class="card-footer d-flex justify-content-between align-items-center">
                 <div><h5>${singleFeture.name}</h5>
                 <p><i class="fa-solid fa-calendar-days"></i> ${singleFeture.published_in}</p></div>
-                <div>
-                <i class="fa-solid fa-arrow-right" onclick="loadSingleData('${singleFeture.id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+                <div      <i class="fa-solid fa-arrow-right" onclick="loadSingleData('${singleFeture.id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
                 </div>
             </div>
           </div>
@@ -147,11 +146,10 @@ const loadSingleData =(id)=>{
 }
 
 const displayData =data=>{
+  
   console.log(data)
   const modalBody = document.getElementById('modal-body')
-  const cardDiv = document.createElement('div')
-        cardDiv.classList.add('col')
-        cardDiv.innerHTML=`
+        modalBody.innerHTML=`
            <div class="card h-100">
            <div class="card-body bg-danger-subtle">
            <div class="d-flex flex-column justify-content-center align-items-center gap-5 w-50" >
@@ -177,10 +175,10 @@ const displayData =data=>{
 
               </div>
 
-              <div class="card w-50 min-vh-100" >
+              <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
               
-  <div class=" btn btn-danger position-relative mx-5 ">${data.accuracy.score} Accuray</div>
-  <img src="${data.image_link[0]}" class="img card-img-top" 
+  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score} Accuray</div>
+  <img src="${data.image_link[0]}" class="img card-img-top " 
    
   alt="...">
   <div>
@@ -193,7 +191,6 @@ const displayData =data=>{
            </div>
          
         `
-        modalBody.appendChild(cardDiv)
 }
 
 
