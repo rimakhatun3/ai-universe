@@ -30,7 +30,7 @@ const displayFeature=(data)=>{
    
     data = data.tools.slice(0,6)
     data.forEach(singleFeture => {
-        console.log(singleFeture);
+        // console.log(singleFeture);
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
         cardDiv.innerHTML=`
@@ -51,15 +51,36 @@ const displayFeature=(data)=>{
             </div>
           </div>
         `
-        
         cardContainer.appendChild(cardDiv);
-    }); 
-    const showDateInfo =()=>{
-      const fetchData =fetchData.filter(singleFeture.published_in)
-      console.log(fetchData)
-    } 
-    
+        });
 }
+
+const showDateInfo =()=>{
+  document.getElementById('loader').classList.remove("d-none")
+    url=`https://openapi.programming-hero.com/api/ai/tools`
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+      document.getElementById('loader').classList.add("d-none");
+      displayDate(data.data)
+      fetchData = data.data;
+      // console.log(fetchData);
+  // const fetchData =fetchData.filter(tools.published_in)
+    })
+} 
+
+const displayDate=(data)=>{
+  
+  data.tools.forEach(singleData=>{
+    // fetchData.sort(a,b){
+      
+    // }
+    console.log(singleData)
+  })
+}
+//  showDateInfo()
+      
+      
 
 
 
