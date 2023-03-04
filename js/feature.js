@@ -169,15 +169,16 @@ const displayData =data=>{
   console.log(data)
   const modalBody = document.getElementById('modal-body')
         modalBody.innerHTML=`
-           <div class="card h-100">
-           <div class="card-body bg-danger-subtle">
-           <div class="d-flex flex-column justify-content-center align-items-center gap-5 w-50" >
-                <div class="d-flex"><p class="card-detail">${data.description}</p></div>
-                <div class="d-flex gap-5 mb-5" >
-                <div class="border rounded bg-light px-2 py-4  text-success"><p>${data.pricing[0].price?data.pricing[0].price:'Free Of Cost/Basic'}</p></div>
-                <div class="border text-warning rounded bg-light px-2 py-4"><p>${data.pricing[1].price?data.pricing[1].price:'Free Of Cost/pro'}</p></div>
-                
-                <p class="text-danger border rounded w-50 h-50 bg-light  px-2 py-4 ">${data.pricing[2].price?data.pricing[2].price:'Fre Of Cost /Enterprise'}</p></div>
+        <div class="row">
+        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+            <div class="d-flex"><p class="card-detail">${data.description}</p></div>
+            <div class="d-flex gap-5 mb-5" >
+                <div class="border rounded w-100 h-100 bg-light px-2 py-4  text-success"><p>${data.pricing[0].price?data.pricing[0].price:'Free Of Cost/Basic'}</p></div>
+                <div class="border text-warning rounded w-100 h-100 bg-light px-2 py-4"><p>${data.pricing[1].price?data.pricing[1].price:'Free Of Cost/pro'}</p></div>
+                <div>
+                <p class="text-danger border rounded w-100 h-100 bg-light  px-2 py-4 ">${data.pricing[2].price?data.pricing[2].price:'Fre Of Cost /Enterprise'}</p></div>
                 
               </div>
               <div class="d-flex justify-content-between me-4">
@@ -190,25 +191,27 @@ const displayData =data=>{
               <h5 class="card-title">Integrations</h5> 
               <li>${data.integrations[0]?data.integrations[0]:'not available'}</li>
               <li>${data.integrations[1]?data.integrations[1]:'not available'}</li>
-              <li>${data.integrations[2]?data.integrations[2]:'not available'}}</li>
-
+              <li>${data.integrations[2]?data.integrations[2]:'not available'}</li>
               </div>
-
-              <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
-              
-  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 me-2 ">${data.accuracy.score?data.accuracy.score*100:''} Accuray</div>
-  <img src="${data.image_link[0]?data.image_link[0]:'no image'}" class="img card-img-top " 
-   
-  alt="...">
-  <div>
-  <h5 class="px-4 py-2">Hi, how are you doing today?</h5>
-    <p class="card-text px-4 py-2">${data.description}</p>
-  </div>
-</div>
               </div>
-           </div>
-           </div>
-         
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="card">
+            <div class="card-body">
+            <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 me-2 ">${data.accuracy.score?data.accuracy.score*100:''} Accuray</div>
+            <img src="${data.image_link[0]?data.image_link[0]:'no image'}" class="img card-img-top " 
+             
+            alt="...">
+            <div>
+            <h5 class="px-4 py-2">Hi, how are you doing today?</h5>
+              <p class="card-text px-4 py-2">${data.description}</p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
         `
 }
 
