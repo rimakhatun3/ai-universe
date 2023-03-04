@@ -7,7 +7,7 @@ const loadFeature=()=>{
     .then(data=>{
       document.getElementById('loader').classList.add("d-none");
       displayFeature(data.data)
-      fetchData = data.data;
+      // fetchData = data.data.tools;
       console.log(fetchData);
       
      
@@ -16,7 +16,7 @@ const loadFeature=()=>{
 }
 
 const displayFeature=(data)=>{
-    console.log(data)
+    // console.log(data)
     const cardContainer= document.getElementById('card-container')
     cardContainer.innerHTML ='';
     const seeAll = document.getElementById("see-all")
@@ -30,7 +30,7 @@ const displayFeature=(data)=>{
    
     data = data.tools.slice(0,6)
     data.forEach(singleFeture => {
-        // console.log(singleFeture);
+        // console.log(data);
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
         cardDiv.innerHTML=`
@@ -62,11 +62,11 @@ const showDateInfo =()=>{
     .then(res=>res.json())
     .then(data=>{
       document.getElementById('loader').classList.add("d-none");
-      displayDate(data.data)
+      (data.data)
       fetchData = data.data;
       console.log(fetchData);
   // const fetchData =fetchData.map(tools.published_in)
-  const sorting = (a,b) =>{
+ fetchData.sort(function(a,b) {
     const dateA = new Date(a.published_in);
     const dateB = new Date(b.published_in);
     if(dateA>dateB){
@@ -78,18 +78,17 @@ const showDateInfo =()=>{
     else {
       return 0
     }
-  }
-    })
-} 
+  })
 
-const displayDate=(sortingDate)=>{
-  // fetchData = sortingDate.data.tools;
-  // sortingDate = sortingDate.tools.slice(0,6)
-  console.log(fetchData)
-  sortingDate.tools.forEach(datas=>{
-  console.log((datas.sort(fetchData)))
     })
+
+  }
+  
+
+const displayDate=()=>{
+  displayFeature(fetchData);
 }
+showDateInfo()
 
 const loadAllData=()=>{
   url=`https://openapi.programming-hero.com/api/ai/tools`
@@ -173,7 +172,7 @@ const displayData =data=>{
 
               <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
               
-  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score} Accuray</div>
+  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score*100} Accuray</div>
   <img src="${data.image_link[0]}" class="img card-img-top " 
    
   alt="...">
