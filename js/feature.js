@@ -17,10 +17,9 @@ const loadFeature=()=>{
 
 const displayFeature=(data)=>{
     console.log(data)
-    const cardContainer= document.getElementById('card-container')
-    const seeAll = document.getElementById("see-all");
-    cardContainer.textContent ='';
+    const cardContainer= document.getElementById('card-container');
     data = data.tools.slice(0,6)
+    cardContainer.textContent =''
     data.forEach(singleFeture => {
         console.log(data);
         const cardDiv = document.createElement('div')
@@ -125,6 +124,14 @@ const loadAllData=()=>{
 
 const seeAllData =(data)=>{
   // console.log(data)
+  const seeAll = document.getElementById("btn-see-all");
+  
+    if(data.length>6){
+      seeAll.classList.remove('d-none')
+    }
+   else {
+seeAll.classList.add('d-none')
+    }
   data.tools.forEach(singleFeture=>{
     const seAll = document.getElementById('see-all');
 const div = document.createElement('div');
@@ -178,7 +185,7 @@ const displayData =data=>{
                 <div class="border rounded bg-light px-2 py-4  text-success"><p>${data.pricing[0].price?data.pricing[0].price:'Free Of Cost/Basic'}</p></div>
                 <div class="border text-warning rounded bg-light px-2 py-4"><p>${data.pricing[1].price?data.pricing[1].price:'Free Of Cost/pro'}</p></div>
                 
-                <p class="text-danger border rounded bg-light  px-2 py-4 ">${data.pricing[2].price?data.pricing[0].price:'Fre Of Cost /Enterprise'}</p></div>
+                <p class="text-danger border rounded w-50 h-50 bg-light  px-2 py-4 ">${data.pricing[2].price?data.pricing[2].price:'Fre Of Cost /Enterprise'}</p></div>
                 
               </div>
               <div class="d-flex justify-content-between me-4">
@@ -197,7 +204,7 @@ const displayData =data=>{
 
               <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
               
-  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 me-2 ">${data.accuracy.score ?data.accuracy.score*100:'d-none'} Accuray</div>
+  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 me-2 ">${data.accuracy.score?data.accuracy.score*100:''} Accuray</div>
   <img src="${data.image_link[0]?data.image_link[0]:'no image'}" class="img card-img-top " 
    
   alt="...">
