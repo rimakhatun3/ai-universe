@@ -124,14 +124,6 @@ const loadAllData=()=>{
 
 const seeAllData =(data)=>{
   // console.log(data)
-  const seeAll = document.getElementById("btn-see-all");
-  
-    if(data.length>6){
-      seeAll.classList.remove('d-none')
-    }
-   else {
-seeAll.classList.add('d-none')
-    }
   data.tools.forEach(singleFeture=>{
     const seAll = document.getElementById('see-all');
 const div = document.createElement('div');
