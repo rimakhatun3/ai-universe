@@ -169,9 +169,9 @@ const displayData =data=>{
   console.log(data)
   const modalBody = document.getElementById('modal-body')
         modalBody.innerHTML=`
-        <div class="row">
+        <div class="row ">
         <div class="col-12 col-sm-6 mb-3 mb-sm-0">
-          <div class="card">
+          <div class="card bg-danger-subtle">
             <div class="card-body">
             <div class="d-flex"><p class="card-detail">${data.description}</p></div>
             <div class="d-flex gap-5 mb-5" >
