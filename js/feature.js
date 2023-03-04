@@ -20,14 +20,6 @@ const displayFeature=(data)=>{
     const cardContainer= document.getElementById('card-container')
     const seeAll = document.getElementById("see-all");
     cardContainer.textContent ='';
-    // if(data.length>6){
-    //  data = data.tools.slice(0,6) 
-    //   seeAll.classList.remove('d-none')
-    // }
-    // else{
-    //   seeAll.classList.add('d-none')
-    // }
-   
     data = data.tools.slice(0,6)
     data.forEach(singleFeture => {
         console.log(data);
@@ -55,6 +47,7 @@ const displayFeature=(data)=>{
         cardContainer.appendChild(cardDiv);
         });
 }
+// sort date
 
 const showDateInfo =()=>{
   document.getElementById('loader').classList.remove("d-none")
@@ -63,11 +56,18 @@ const showDateInfo =()=>{
     .then(res=>res.json())
     .then(data=>{
       document.getElementById('loader').classList.add("d-none");
-      (data.data)
+      displayDate(data.data);
       fetchData = data.data.tools;
       console.log(fetchData);
   // const fetchData =fetchData.map(tools.published_in)
- let newData = fetchData.sort(function(a,b) {
+
+// console.log(newData)
+    })
+    
+  }
+
+const displayDate=()=>{
+  let newData = fetchData.sort(function(a,b) {
     const dateA = new Date(a.published_in);
     const dateB = new Date(b.published_in);
     if(dateA>dateB){
@@ -81,16 +81,39 @@ const showDateInfo =()=>{
     }
    
   })
-console.log(newData)
-    })
-    
-  }
 
-const displayDate=()=>{
-  displayFeature(newData);
+    const cardContainer= document.getElementById('card-container')
+    cardContainer.textContent ='';
+    newData = newData.slice(0,6);
+    newData.forEach(singleDate => {
+        console.log(singleDate);
+        const cardDiv = document.createElement('div')
+        cardDiv.classList.add('col');
+        cardDiv.innerHTML=`
+            <div class="card h-100">
+              <img  src="${singleDate.image}" class="card-img-top border-rounded  px-4 py-4" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Features</h5>
+                <p>1.${singleDate.features[0]?singleDate.features[0]:'not available'}</p>
+                <p>2.${singleDate.features[1]?singleDate.features[1]:'not available'}</p>
+                <p>3.${singleDate.features[2]?singleDate.features[2]:'not available'}</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between align-items-center">
+                <div><h5>${singleDate.name}</h5>
+                <p><i class="fa-solid fa-calendar-days"></i> ${singleDate.published_in}</p></div>
+                <div>
+                <i class="fa-solid fa-arrow-right bg-danger rounded-circle text-white p-2" onclick="loadSingleData('${singleDate.id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+                </div>
+            </div>
+          </div>
+        `
+        
+        cardContainer.appendChild(cardDiv);
+        });
+  // })
 }
 showDateInfo()
-
+// see all card
 const loadAllData=()=>{
   url=`https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
@@ -133,6 +156,7 @@ seAll.appendChild(div);
   
   
 }
+// modal open......
 
 const loadSingleData =(id)=>{
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
@@ -154,7 +178,7 @@ const displayData =data=>{
                 <div class="border rounded bg-light px-2 py-4  text-success"><p>${data.pricing[0].price?data.pricing[0].price:'Free Of Cost/Basic'}</p></div>
                 <div class="border text-warning rounded bg-light px-2 py-4"><p>${data.pricing[1].price?data.pricing[1].price:'Free Of Cost/pro'}</p></div>
                 
-                <p class="text-danger border rounded bg-light px-4 py-2">${data.pricing[2].price?data.pricing[0].price:'Fre Of Cost /Enterprise'}</p></div>
+                <p class="text-danger border rounded bg-light  px-2 py-4 ">${data.pricing[2].price?data.pricing[0].price:'Fre Of Cost /Enterprise'}</p></div>
                 
               </div>
               <div class="d-flex justify-content-between me-4">
@@ -173,7 +197,7 @@ const displayData =data=>{
 
               <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
               
-  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score ?data.accuracy.score*100:'d-none'} Accuray</div>
+  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 me-2 ">${data.accuracy.score ?data.accuracy.score*100:'d-none'} Accuray</div>
   <img src="${data.image_link[0]?data.image_link[0]:'no image'}" class="img card-img-top " 
    
   alt="...">
