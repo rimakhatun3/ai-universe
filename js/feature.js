@@ -79,14 +79,14 @@ const showDateInfo =()=>{
       return 0
     }
   })
-
+ 
     })
 
   }
   
 
 const displayDate=()=>{
-  displayFeature(fetchData);
+  displayFeature(fetchData.sort(sorting));
 }
 showDateInfo()
 
@@ -172,7 +172,7 @@ const displayData =data=>{
 
               <div class="card w-50 min-vh-100 grid grid-cols-1 grid-cols-md-2" >
               
-  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score*100} Accuray</div>
+  <div class=" btn btn-danger position-absolute top-0 end-0 mt-2 ">${data.accuracy.score ?data.accuracy.score*100:'d-none'} Accuray</div>
   <img src="${data.image_link[0]}" class="img card-img-top " 
    
   alt="...">
